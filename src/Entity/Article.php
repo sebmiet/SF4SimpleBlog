@@ -34,7 +34,7 @@ class Article
     /**
      * @ORM\Column(type="datetime")
      */
-    private $post_date;
+    private $postdate;
 
     /**
      * @ORM\Column(type="text")
@@ -84,12 +84,12 @@ class Article
 
     public function getPostDate(): ?\DateTimeInterface
     {
-        return $this->post_date;
+        return $this->postdate;
     }
 
-    public function setPostDate(\DateTimeInterface $post_date): self
+    public function setPostDate(\DateTimeInterface $postdate): self
     {
-        $this->post_date = $post_date;
+        $this->postdate = $postdate;
 
         return $this;
     }
