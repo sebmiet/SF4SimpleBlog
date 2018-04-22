@@ -1,23 +1,40 @@
 {% extends 'base.html.twig' %}
+{% block title %}Spóźniony START w IT{% endblock %}
 {% block body %}
 
-
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ asset('assets/img/bg-img.jpg') }}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h2>Spóźniony</h2>
+                        <h1>Start w IT</h1>
+                        <span class="subheading">czyli...<br><h3>40 lat jeszcze nie minęło :)</h3></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     <!-- Main Content -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 {%  for article in articles %}
                 <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
+                    <a href="{{ path('article', {'id': article.id, 'title': article.title | replace({' ':'-', ',':'-'}) }) }}">
+                        <h1 class="post-title">
                             {{ article.title }}
-                        </h2>
-                        <h3 class="post-subtitle">
+                        </h1>
+                        <h2 class="post-subtitle">
                             {{ article.subtitle }}
-                        </h3>
+                        </h2>
                     </a>
                     <p class="post-meta">Opublikowany
-                        {{ article.postdate|date("d-m-Y") }} przez
+                        {{ article.postdate|date('d ') }}
+                        {{ datePolish[article.postdate|date('m')] }}
+                        {{ article.postdate|date(' Y') }} przez
                         <a href="about.php">{{ article.author }}</a>
                         </p>
                 </div>

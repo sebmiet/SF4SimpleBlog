@@ -6,7 +6,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="Shortcut icon" href="{{ asset('assets/ikona.ico') }}" />
         {% block stylesheets %}
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,24 +24,26 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            {#<a class="navbar-brand" href="index.html">$this->homepage :)</a>#}
+            <img src="{{ asset('assets/img/logo.png') }}" style="width: 40px; height: auto; margin-top: 0px">
+            <a class="navbar-brand" href="index.html">sebmiet_blog</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fa fa-bars"></i>
             </button>
-            <div class="col-sm-3 my-1">
-                <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Szukaj</div>
-                    </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Szukaj artykułu...">
-                </div>
-            </div>
+            {#<div class="col-sm-3 my-1">#}
+                {#<label class="sr-only" for="inlineFormInputGroupUsername">Username</label>#}
+           {##}
+                {#<div class="input-group">#}
+                    {#<div class="input-group-prepend">#}
+                        {#<div class="input-group-text">Szukaj</div>#}
+                    {#</div>#}
+                    {#<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Szukaj artykułu...">#}
+                {#</div>#}
+            {#</div>#}
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{{ path('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">O mnie</a>
@@ -49,27 +52,15 @@
                         <a class="nav-link" href="contact.html">Kontakt</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="newsletter.html">Newsletter</a>
+                    </li>
                 </ul>
                 </div>
 
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('{{ asset('assets/img/bg-img.jpg') }}')">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <h2>Spóźniony</h2>
-                        <h1>Start w IT</h1>
-                        <span class="subheading">czyli...<br><h3>40 lat jeszcze nie minęło :)</h3></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+
     {% block body %}{% endblock %}
     <!-- Footer -->
     <footer>
@@ -77,14 +68,6 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                            </a>
-                        </li>
                         <li class="list-inline-item">
                             <a href="#">
                   <span class="fa-stack fa-lg">
@@ -97,13 +80,30 @@
                             <a href="#">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                   </span>
                             </a>
                         </li>
                     </ul>
                     <p class="copyright text-muted">Wszelkie prawa zastrzeżone w odniesieniu do treści &copy; Sebastian Miętka 2018<br>
-                    Natomiast sam "silnik" bloga udostępniam na swoim GitHub'ie na licencji - bierz i rób z tym co chcesz :)</p>
+                        Sam "silnik" bloga udostępniam na swoim <a href="https://github.com/sebmiet/SF4SimpleBlog">GitHub'ie</a> na licencji typu -> bierz i rób z tym co chcesz :)</p>
                 </div>
             </div>
         </div>

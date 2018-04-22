@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block body %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ asset('assets/img/post01.jpg') }}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{ article.title }}</h1>
+                    <h2>{{ article.subtitle }}</h2>
+                    <span class="meta">Opublikowany {{ article.postDate|date('d ')}} {{ monthPolish }} {{  article.postDate|date(' Y') }}
+                        przez <a href="">{{ article.author }}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>{{ article.content|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+{% endblock %}

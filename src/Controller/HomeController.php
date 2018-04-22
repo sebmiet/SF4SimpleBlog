@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,23 +19,55 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends AbstractController
 {
 
-//    /**
-//     * @Route("/")
-//     */
-//    public function homepage()
-//    {
-//        return $this->render('blog/blog.html.twig');
-//    }
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function homepage()
     {
+
         $repository = $this->getDoctrine()->getRepository(Article::class);
         $articles = $repository->findAll();
 
-        return $this->render('blog/blog.html.twig', ['articles' => $articles]);
+
+
+        return $this->render('blog/blog.html.twig', ['articles' => $articles, 'datePolish' => $this->dateMonthPolish() ]);
     }
+
+
+
+    /**
+     * @param $id
+     * @Route("/blog/{id}-{title}", name = "article")
+     */
+    public function showPost($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $article = $repository->find($id);
+
+        //Ustawienie poprawnie zapisanej nazwy miesiąca w języku polskim,
+        $date = $article->getPostDate();
+        $monthPolish = $this->dateMonthPolish($date->format("m"));
+
+
+
+        return $this->render('blog/article.html.twig', ['article' => $article, 'monthPolish' => $monthPolish]);
+    }
+
+
+
+    public function dateMonthPolish($mth = null)
+    {
+        $month = array ('01' => 'stycznia', '02' => 'lutego', '03' => 'marca', '04' => 'kwietnia',
+                        '05' => 'maja', '06' => 'czerwca', '07' => 'lipca', '08' => 'sierpnia',
+                        '09' => 'września', '10' => 'października', '11' => 'listopada', '12' => 'grudnia');
+
+        if ($mth == null) {
+            return $month;
+        } else {
+            return $month[$mth];
+        }
+    }
+
 
 
 }
