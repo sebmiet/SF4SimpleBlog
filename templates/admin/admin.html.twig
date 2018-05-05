@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="Shortcut icon" href="{{ asset('assets/ikona.ico') }}" />
+    {% block stylesheets %}
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom fonts for this template -->
+        <link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('assets/css/simple-sidebar.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Zarządzaj blogiem
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('addarticle') }}">Dodaj wpis</a>
+            </li>
+            <li>
+                <a href="{{ path('showarticles') }}">Edytuj wpis</a>
+            </li>
+            <li>
+                <a href="#">Usuń wpis</a>
+            </li>
+            <li>
+                <a href="#">Zarządzaj hasłem</a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Menu</a>
+
+
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+{% block javascripts %}
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+{% endblock %}
+</body>
+</html>

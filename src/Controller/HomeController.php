@@ -10,17 +10,16 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+
 
 
 class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/", name="home")
+     * @Route("/", name = "home")
      */
     public function homepage()
     {
@@ -28,11 +27,21 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Article::class);
         $articles = $repository->findAll();
 
+        //Sortowanie wpisów po dacie publikacji od najstarszego do najnowszego
+       usort( $articles, function( Article $a, Article $b ){
+            if ( $a->getPostDate() == $b->getPostDate())
+            {
+                return 0;
+            }
+            else
+            {
+                return ( $a->getPostDate() < $b->getPostDate()) ? 1 : -1;
+            }
+        });
 
 
         return $this->render('blog/blog.html.twig', ['articles' => $articles, 'datePolish' => $this->dateMonthPolish() ]);
     }
-
 
 
     /**
@@ -47,8 +56,6 @@ class HomeController extends AbstractController
         //Ustawienie poprawnie zapisanej nazwy miesiąca w języku polskim,
         $date = $article->getPostDate();
         $monthPolish = $this->dateMonthPolish($date->format("m"));
-
-
 
         return $this->render('blog/article.html.twig', ['article' => $article, 'monthPolish' => $monthPolish]);
     }

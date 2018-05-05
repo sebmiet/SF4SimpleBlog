@@ -1,0 +1,38 @@
+{% extends 'admin/admin.html.twig' %}
+{#{% block header %}{{ title }}{% endblock %}#}
+{% block body %}
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 mx-auto">
+                    <h4>Spis artukułów</h4>
+
+                    <table class="table-striped table-bordered">
+                        <tr>
+                            <th>ID</th>
+                            <th>Tytuł</th>
+                            <th>Podtytuł</th>
+                            <th>Opublikowany dnia</th>
+                            <th>Autor</th>
+                            <th>Edytuj / Usuń</th>
+                        </tr>
+                        {% for article in articles %}
+                        <tr>
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.subtitle }}</td>
+                            <td>{{ article.postdate|date('d-m-Y') }}</td>
+                            <td>{{ article.author }}</td>
+                            <td><a href="#">Edytuj</a><br><a href="#"> Usuń</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endblock %}
