@@ -6,7 +6,15 @@
 
 body {
   overflow-x: hidden;
-  background-color: #f2f2f2;
+  background: #f2f2f2;
+}
+
+textarea {
+  min-height: 350px;
+}
+
+.btn-fixed{
+  position: fixed;
 }
 
 #wrapper {
@@ -121,3 +129,4 @@ body {
     margin-right: 0;
   }
 }
+

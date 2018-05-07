@@ -28,6 +28,7 @@ class AdminController extends Controller
         return $this->render('admin/admin.html.twig');
     }
 
+    //funkcja dodania nowego artykułu
     /**
      * @Route("/adminpage/addarticle", name="addarticle")
      */
@@ -52,10 +53,37 @@ class AdminController extends Controller
 
    }
 
+   //funkcja edycji istniejącego artykułu.
+    /**
+     * @param $id
+     * @Route("/adminpage/editarticle-{id}-{title}", name="editarticle")
+     */
+    public function editArticle($id, Request $request)
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $article = $repository->find($id);
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        if  ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+            return $this->redirectToRoute('article', [
+                'id' => $article->getId(), 'title' => $article->getTitle()]);
+        }
+
+        return $this->render('admin/editarticle.html.twig', array('form' => $form->createView(), 'title' => 'Edytuj wpis'));
+
+    }
+
+    //Wyświetlenie listy artykułów w widoku administratora -> tabela
     /**
      * @Route("/adminpage/showarticles", name="showarticles")
      */
-    public function showArticles($id = null)
+    public function showArticles()
     {
         $repository = $this->getDoctrine()->getRepository(Article::class);
         $articles = $repository->findAll();

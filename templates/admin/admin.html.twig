@@ -51,16 +51,18 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Menu</a>
+            <a href="#menu-toggle" class="btn btn-primary btn-fixed" id="menu-toggle">Menu</a>
 
 
             {% block body %}{% endblock %}
         </div>
     </div>
+</div>
     <!-- /#page-content-wrapper -->
 
 
 {% block javascripts %}
+
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -71,6 +73,43 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+    <script>
+        var table = $('table');
+
+        $('#id, #title, #subtitle, #author, #postdate')
+            .wrapInner('<span title="Posortuj tą kolumnę"/>')
+            .each(function(){
+
+                var th = $(this),
+                    thIndex = th.index(),
+                    inverse = false;
+
+                th.click(function(){
+
+                    table.find('td').filter(function(){
+
+                        return $(this).index() === thIndex;
+
+                    }).sortElements(function(a, b){
+
+                        return $.text([a]) > $.text([b]) ?
+                            inverse ? -1 : 1
+                            : inverse ? 1 : -1;
+
+                    }, function(){
+
+                        return this.parentNode;
+
+                    });
+
+                    inverse = !inverse;
+
+                });
+
+            });
+    </script>
+
+
 
 {% endblock %}
 </body>
